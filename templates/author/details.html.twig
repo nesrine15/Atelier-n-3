@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'auteur{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        background-color: #fdf6e3; /* couleur papier ancien */
+        color: #4b2e2e; /* texte marron foncé */
+    }
+    h1, h2 {
+        text-align: center;
+        color: #4b2e2e;
+    }
+    .author-details {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #fff8f0;
+        border: 1px solid #d8c2a0;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    .author-details ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+    .author-details li {
+        margin: 5px 0;
+        font-size: 1em;
+    }
+    .author-info p {
+        font-size: 1.05em;
+        margin: 8px 0;
+        color: #5a3f36;
+    }
+</style>
+
+<div class="author-details">
+    <h1>Auteur : {{ name|upper }}</h1>
+    <div class="author-info">
+        <p><strong>Âge :</strong> {{ age }}</p>
+    </div>
+
+    <h2>Livres :</h2>
+    <ul>
+        {% for book in books %}
+            <li>{{ book }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        background-color: #fdf6e3; /* couleur papier ancien */
+        color: #4b2e2e; /* texte marron foncé */
+    }
+    h1 {
+        text-align: center;
+        color: #4b2e2e;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+    .stats {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+        color: #6b4a3e;
+    }
+    .author-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 0;
+        list-style: none;
+    }
+    .author-card {
+        background-color: #fff8f0;
+        border: 1px solid #d8c2a0;
+        border-radius: 10px;
+        padding: 20px;
+        width: 250px;
+        text-align: center;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    .author-card img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 12px;
+        border: 2px solid #d8c2a0;
+    }
+    .author-card h3 {
+        margin: 8px 0;
+        color: #4b2e2e;
+    }
+    .author-card p {
+        margin: 5px 0;
+        font-size: 0.95em;
+        color: #5a3f36;
+    }
+    .details-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #800000; /* bordeaux */
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .details-btn:hover {
+        background-color: #a52a2a; /* marron foncé au survol */
+    }
+</style>
+
+<h1>Liste des auteurs</h1>
+
+{% if authors is defined and authors|length > 0 %}
+    <div class="stats">
+        Nombre d'auteurs : <strong>{{ authors|length }}</strong> | 
+        Nombre total de livres : <strong>{{ totalBooks }}</strong>
+    </div>
+
+    <ul class="author-list">
+        {% for author in authors %}
+            <li class="author-card">
+               <img src="{{ asset(author.picture) }}" alt="{{ author.username }}" 
+     onerror="console.log('Image failed to load: {{ author.picture }}')">
+
+
+                <h3>{{ author.username|upper }}</h3>
+                <p><strong>Email:</strong> {{ author.email }}</p>
+                <p><strong>Livres:</strong> {{ author.nb_books }}</p>
+                <a href="{{ path('app_author_details_by_id', {'id': author.id}) }}" class="details-btn">Voir détails</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p style="text-align:center;">Aucun auteur trouvé.</p>
+{% endif %}
+{% endblock %}
