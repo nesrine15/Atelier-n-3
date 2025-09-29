@@ -41,7 +41,8 @@
 </style>
 
 <div class="author-card">
-    <img src="{{ author.picture }}" alt="{{ author.username }}">
+   <img src="{{ asset(author.picture) }}" alt="{{ author.username }}" width="150">
+
     <p><strong>Nom :</strong> {{ author.username|upper }}</p>
     <p><strong>Email :</strong> {{ author.email }}</p>
     <p><strong>Nombre de livres :</strong> {{ author.nb_books }}</p>
